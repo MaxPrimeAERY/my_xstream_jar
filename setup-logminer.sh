@@ -17,8 +17,16 @@ sqlplus /nolog <<- EOF
 EOF
 
 # Enable LogMiner required database features/settings
-sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- EOF
+sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- 'EOF'
   ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+  ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+
+   	 SELECT SUPPLEMENTAL_LOG_DATA_MIN min,
+   	        SUPPLEMENTAL_LOG_DATA_PK pk,
+   	        SUPPLEMENTAL_LOG_DATA_UI ui,
+   	        SUPPLEMENTAL_LOG_DATA_FK fk,
+   	        SUPPLEMENTAL_LOG_DATA_ALL "all"
+   	     from v$database;
   ALTER PROFILE DEFAULT LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
   exit;
 EOF
