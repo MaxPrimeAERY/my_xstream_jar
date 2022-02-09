@@ -73,6 +73,7 @@ sqlplus sys/Admin123@//localhost:1521/ORCLPDB1 as sysdba <<- EOF
   GRANT CREATE SESSION TO debezium;
   GRANT CREATE TABLE TO debezium;
   GRANT CREATE SEQUENCE to debezium;
+  GRANT CREATE TYPE to debezium;
   ALTER USER debezium QUOTA 100M on users;
   exit;
 EOF
